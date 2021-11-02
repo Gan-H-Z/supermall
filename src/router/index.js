@@ -9,6 +9,7 @@ const Profile = () => import('views/profile/profile')
 // 1.安装VueRouter
 Vue.use(VueRouter)
 
+
 // 2.配置路由信息
 const routes = [
   {

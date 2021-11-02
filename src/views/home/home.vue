@@ -1,9 +1,17 @@
 <template>
-  <div>首页</div>
+  <div id="home">
+    <nav-bar></nav-bar>
+  </div>
 </template>
 
 <script>
-export default {};
+import NavBar from "conponents/common/navbar/NavBar";
+
+export default {
+  components: {
+    NavBar,
+  },
+};
 </script>
 
 <style scoped>
