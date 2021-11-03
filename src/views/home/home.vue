@@ -1,16 +1,20 @@
 <template>
   <div id="home">
     <nav-bar class="nav-bar"><div slot="center">购物街</div></nav-bar>
+    <home-swiper :banner="banners"></home-swiper>
   </div>
 </template>
 
 <script>
 import NavBar from "components/common/navbar/NavBar";
+import HomeSwiper from "./homeSwiper/HomeSwiper.vue";
+
 import { getHomeMultidata } from "network/home.js";
 
 export default {
   components: {
     NavBar,
+    HomeSwiper,
   },
   data() {
     return {
