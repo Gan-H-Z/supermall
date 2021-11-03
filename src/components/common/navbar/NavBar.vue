@@ -14,13 +14,14 @@ export default {};
   display: flex;
   height: 44px;
   line-height: 44px;
+  box-shadow: 0 1px 1px rgba(100, 100, 100, 0.1);
+  text-align: center;
 }
-.left .right {
-  width: 40px;
-  background-color: pink;
+.left,
+.right {
+  width: 60px;
 }
 .center {
   flex: 1;
-  background-color: skyblue;
 }
 </style>
