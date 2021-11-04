@@ -1,9 +1,9 @@
 <template>
   <div>
     <swiper>
-      <swiper-item>
-        <a :v-for="item in banner" href="item.link">
-          <img src="item.image" alt="" />
+      <swiper-item v-for="(item, index) in banners" :key="index">
+        <a :href="item.link">
+          <img :src="item.image" alt="" />
         </a>
       </swiper-item>
     </swiper>
@@ -14,7 +14,7 @@ import { Swiper, SwiperItem } from "components/common/swiper/index.js";
 
 export default {
   props: {
-    banner: {
+    banners: {
       type: Array,
       default() {
         return [];
