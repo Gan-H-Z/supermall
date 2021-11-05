@@ -4,7 +4,7 @@
     <home-swiper :banners="banners" class="swiper"></home-swiper>
     <home-recommend :recommends="recommends" />
     <home-feature />
-
+    <tab-control :control="['流行', '新款', '精选']" class="tab-control" />
     <ul>
       <li>列表1</li>
       <li>列表2</li>
@@ -41,19 +41,22 @@
 </template>
 
 <script>
-import NavBar from "components/common/navbar/NavBar";
 import HomeSwiper from "./childComps/HomeSwiper.vue";
 import HomeRecommend from "./childComps/HomeRecommendView.vue";
 import HomeFeature from "./childComps/HomeFeatureView.vue";
+
+import NavBar from "components/common/navbar/NavBar";
+import TabControl from "components/content/tabControl/TabControl.vue";
 
 import { getHomeMultidata } from "network/home.js";
 
 export default {
   components: {
-    NavBar,
     HomeSwiper,
     HomeRecommend,
     HomeFeature,
+    NavBar,
+    TabControl,
   },
   data() {
     return {
@@ -93,5 +96,9 @@ export default {
 }
 .swiper {
   padding-top: 44px;
+}
+.tab-control {
+  position: sticky;
+  top: 44px;
 }
 </style>
