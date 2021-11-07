@@ -2,7 +2,7 @@
   <div id="home">
     <nav-bar class="nav-bar"><div slot="center">购物街</div></nav-bar>
     <home-swiper :banners="banners" class="swiper"></home-swiper>
-    <home-recommend :recommends="recommends" />
+    <!-- <home-recommend :recommends="recommends" />
     <home-feature />
     <tab-control :control="['流行', '新款', '精选']" class="tab-control" />
     <ul>
@@ -36,7 +36,7 @@
       <li>列表28</li>
       <li>列表29</li>
       <li>列表30</li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
@@ -48,7 +48,7 @@ import HomeFeature from "./childComps/HomeFeatureView.vue";
 import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl.vue";
 
-import { getHomeMultidata } from "network/home.js";
+import { getHomeMultidata, getHomeGoods } from "network/home.js";
 
 export default {
   components: {
@@ -71,16 +71,26 @@ export default {
       this.banners = res.data.banner.list;
       this.recommends = res.data.recommend.list;
     });
-  },
 
-  watch: {
-    banners() {
-      console.log(this.banners);
-    },
-    recommends() {
-      console.log(this.recommends);
-    },
+    // 2.请求商品数据
+    // getHomeGoods("pop");
   },
+  // methods: {
+  //   getHomeGoods(type) {
+  //     getHomeGoods(type, page).then((res) => {
+  //       console.log(res);
+  //     });
+  //   },
+  // },
+
+  // watch: {
+  //   banners() {
+  //     console.log(this.banners);
+  //   },
+  //   recommends() {
+  //     console.log(this.recommends);
+  //   },
+  // },
 };
 </script>
 
