@@ -1,22 +1,18 @@
 <template>
   <div id="home">
     <nav-bar class="nav-bar"><div slot="center">购物街</div></nav-bar>
-    <home-swiper :banners="banners" class="swiper"></home-swiper>
-    <home-recommend :recommends="recommends" />
-    <home-feature />
-    <tab-control
-      :control="['流行', '新款', '精选']"
-      class="tab-control"
-      @tabClick="tabClick"
-    />
-    <goods-list :goods="showGoods" />
-    <ul>
-      <li>列表1</li>
-      <li>列表2</li>
-      <li>列表3</li>
-      <li>列表4</li>
-      <li>列表5</li>
-    </ul>
+    <scroll class="content" ref="scroll" :probetype="3" @scroll="contentscroll">
+      <home-swiper :banners="banners" class="swiper"></home-swiper>
+      <home-recommend :recommends="recommends" />
+      <home-feature />
+      <tab-control
+        :control="['流行', '新款', '精选']"
+        class="tab-control"
+        @tabClick="tabClick"
+      />
+      <goods-list :goods="showGoods" />
+    </scroll>
+    <back-top @click.native="backClick" v-show="isShowBackTop" />
   </div>
 </template>
 
@@ -28,6 +24,8 @@ import HomeFeature from "./childComps/HomeFeatureView.vue";
 import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl.vue";
 import GoodsList from "components/content/goods/GoodsList.vue";
+import Scroll from "components/common/scroll/Scroll.vue";
+import BackTop from "components/content/backTop/BackTop.vue";
 
 import { getHomeMultidata, getHomeGoods } from "network/home.js";
 
@@ -39,6 +37,8 @@ export default {
     NavBar,
     TabControl,
     GoodsList,
+    Scroll,
+    BackTop,
   },
 
   data() {
@@ -51,6 +51,7 @@ export default {
         sell: { page: 0, list: [] },
       },
       currentType: "pop",
+      isShowBackTop: false,
     };
   },
   created() {
@@ -99,6 +100,12 @@ export default {
         this.goods[type].list.push(...res.data.list);
       });
     },
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0, 500);
+    },
+    contentscroll(position) {
+      this.isShowBackTop = -position.y > 1000;
+    },
   },
   computed: {
     showGoods() {
@@ -118,6 +125,14 @@ export default {
 </script>
 
 <style scoped>
+#home {
+  /* height: 100vh; */
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
+}
 .nav-bar {
   background-color: rgb(240, 161, 174);
   color: #fff;
@@ -127,12 +142,18 @@ export default {
   right: 0;
   z-index: 9;
 }
-.swiper {
-  padding-top: 44px;
-}
+
 .tab-control {
   position: sticky;
   top: 44px;
   z-index: 9;
 }
+
+.content {
+  height: 100%;
+}
+/* .content {
+  height: calc(100% - 93px);
+  overflow: hidden;
+} */
 </style>
