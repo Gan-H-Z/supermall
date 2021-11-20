@@ -1,7 +1,13 @@
 <template>
   <div id="home">
     <nav-bar class="nav-bar"><div slot="center">购物街</div></nav-bar>
-    <scroll class="content" ref="scroll" :probetype="3" @scroll="contentscroll">
+    <scroll
+      class="content"
+      ref="scroll"
+      :probetype="3"
+      @scroll="contentscroll"
+      :pillupload="true"
+    >
       <home-swiper :banners="banners" class="swiper"></home-swiper>
       <home-recommend :recommends="recommends" />
       <home-feature />
@@ -63,10 +69,27 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
+  mounted() {
+    const refresh = this.debounce(this.$refs.scroll.refresh);
+    // 3.监听事件总线中我们发送的自定义事件
+    this.$bus.$on("itemImgLoad", () => {
+      refresh();
+    });
+  },
   methods: {
     /**
      * 事件监听相关的方法
      */
+    debounce(func, delay) {
+      let timer = null;
+      return function (...args) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+          func.apply(this, args);
+        }, delay);
+      };
+    },
+
     tabClick(index) {
       switch (index) {
         case 0:

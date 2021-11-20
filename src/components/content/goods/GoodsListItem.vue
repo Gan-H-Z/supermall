@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item">
-    <img :src="goodsData.show.img" alt="" />
+    <img :src="goodsData.show.img" alt="" @load="imgLoad" />
     <div class="goods-info">
       <p>{{ goodsData.title }}</p>
       <span class="price">{{ goodsData.price }}</span>
@@ -21,6 +21,13 @@ export default {
   // created() {
   //   console.log(this.goodsData);
   // },
+  methods: {
+    imgLoad() {
+      // 给事件总线发送一个自定义事件
+      this.$bus.$emit("itemImgLoad");
+      // console.log(123);
+    },
+  },
 };
 </script>
 <style scoped>
