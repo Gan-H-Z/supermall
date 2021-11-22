@@ -9,6 +9,7 @@ import DetailNav from "./childComp/DetailNav.vue";
 import DetailSwiper from "./childComp/DetailSwiper.vue";
 
 export default {
+  name: "Detail",
   components: {
     DetailNav,
     DetailSwiper,
