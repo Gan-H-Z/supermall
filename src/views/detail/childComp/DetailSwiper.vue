@@ -1,30 +1,31 @@
 <template>
   <swiper class="detail-swiper">
     <swiper-item v-for="(item, index) in swiperImg" :key="index">
-      <img :src="item" alt="" />
+      <img :src="item" alt="" @load="imgLoad" />
     </swiper-item>
   </swiper>
 </template>
 <script>
 import { Swiper, SwiperItem } from "components/common/swiper/index.js";
-import { getDetailData } from "network/detail.js";
 
 export default {
+  props: {
+    swiperImg: {
+      typr: Array,
+      default() {
+        return [];
+      },
+    },
+  },
   components: {
     Swiper,
     SwiperItem,
   },
-  data() {
-    return {
-      iid: null,
-      swiperImg: null,
-    };
-  },
-  created() {
-    this.iid = this.$route.params.iid;
-    getDetailData(this.iid).then((res) => {
-      this.swiperImg = res.result.itemInfo.topImages;
-    });
+  methods: {
+    // 图片加载完后发送自定义事件给父组件
+    imgLoad() {
+      this.$emit("imgLoad");
+    },
   },
 };
 </script>

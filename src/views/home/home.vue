@@ -13,7 +13,7 @@
       ref="scroll"
       :probetype="3"
       @scroll="contentscroll"
-      :pillupload="true"
+      :pullupload="true"
       @loadMore="loadMore"
     >
       <home-swiper

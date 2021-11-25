@@ -14,7 +14,7 @@ Bscroll.use(Pullup);
 export default {
   props: {
     probetype: 0,
-    pillupload: false,
+    pullupload: true,
   },
   data() {
     return {
@@ -26,7 +26,7 @@ export default {
     this.bscroll = new Bscroll(this.$refs.wrapper, {
       probeType: this.probetype,
       click: true,
-      pullUpLoad: this.pillupload,
+      pullUpLoad: this.pullupload,
     });
 
     // 2.监听滚动的位置
